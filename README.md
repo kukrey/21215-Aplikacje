@@ -1,11 +1,3 @@
-# 21215-Aplikacje
-Zadanie laboratorium 9-12
-*Pomysł: Sklep z częściami animatronicznymi.
-*Logo: Robot z śrubkami/nakrętkami/kluczami i nazwa na dole
-*Nazwa witryny: "meScrap"
-*"Wstępny" pomysł na baze danych:
-
-
 ## 21215-Aplikacje "MeScrap"
 
 > Ten podprojekt jest częścią materiałów z laboratorium z przedmiotu: **Aplikacje internetowe I**.
