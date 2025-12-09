@@ -27,7 +27,10 @@ Sklep z częściami animatronicznymi
 15.order_items
 ```
 ---
-
+### Pierwszy Prototyp Strony głównej:
+![screen_strony](./strona.png)
+**Opis:**
+Stan z 09-12-2025
 
 ### Autor
 * Jakub "Benito" Błażko
