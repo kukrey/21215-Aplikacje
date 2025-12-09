@@ -2,8 +2,12 @@
 
 > Ten podprojekt jest częścią materiałów z laboratorium z przedmiotu: **Aplikacje internetowe I**.
 ---
-#### Plan
-
+### Plan:
+**Tematyka:**
+Sklep z częściami animatronicznymi
+---
+**Logo:**
+![Logo](./Logo.png)
 **Pomysł na bazę:** 
 ```
 1.users
@@ -22,6 +26,8 @@
 14.orders
 15.order_items
 ```
+---
+
 
 ### Autor
 * Jakub "Benito" Błażko
