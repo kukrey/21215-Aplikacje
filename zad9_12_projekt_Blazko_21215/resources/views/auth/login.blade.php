@@ -179,6 +179,16 @@
             border-color: #ffff00 !important;
         }
 
+        /* Keep the accessibility eye icon unchanged when high-contrast is toggled */
+        body.high-contrast .a11y-icon {
+            background-color: #fff !important;
+            color: #000 !important;
+            border: none !important;
+        }
+        body.high-contrast .a11y-icon i {
+            color: inherit !important;
+        }
+
         /* Large font mode */
         body.large-font { font-size: 1.7rem !important; }
         body.large-font h1 { font-size: 4rem; }
