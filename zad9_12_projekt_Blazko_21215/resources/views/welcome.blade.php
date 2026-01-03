@@ -1116,14 +1116,41 @@
                     @endguest
 
                     @auth
+                    @if(!Auth::user()->isAdmin())
                     <li class="nav-item ms-3">
                         <a class="nav-link" href="{{ route('orders.history') }}" style="color: var(--text-main); margin-right: 15px;">
                             {{ Auth::user()->name }}
                         </a>
                     </li>
+                    @endif
                     @if(Auth::user()->isAdmin())
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" style="color: var(--accent-color);" title="Panel administratora"><i class="bi bi-gear"></i> Admin</a>
+                    <li class="nav-item dropdown ms-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--accent-color);">
+                            <i class="bi bi-gear"></i> Administrator
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
+                            <li>
+                                <a class="dropdown-item text-white" href="{{ route('admin.dashboard') }}">
+                                    <i class="bi bi-house-gear"></i> Panel Główny
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-white" href="{{ route('admin.products') }}">
+                                    <i class="bi bi-box"></i> Zarządzaj Produktami
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-white" href="{{ route('admin.users.search') }}">
+                                    <i class="bi bi-search"></i> Wyszukaj Użytkownika
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-white" href="{{ route('orders.history') }}">
+                                    <i class="bi bi-list-check"></i> Moje Zamówienia
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     @endif
                     <li class="nav-item">
