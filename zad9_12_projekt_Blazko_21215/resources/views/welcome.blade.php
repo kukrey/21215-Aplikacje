@@ -1086,7 +1086,7 @@
 
             <a class="navbar-brand" href="/" aria-label="Animatronic Parts - Start">
 
-                <i class="bi bi-robot" aria-hidden="true"></i> ANIMA-PARTS
+                <img src="{{ asset('Logo.png') }}" alt="Logo" style="height: 48px; margin-right: 8px;"> ANIMA-PARTS
 
             </a>
 
@@ -1102,7 +1102,9 @@
 
                     <li class="nav-item"><a class="nav-link active" href="#main-content" aria-current="page">Start</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="#products">Oferta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('products.index') }}">Oferta</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}"><i class="bi bi-cart3"></i> Koszyk</a></li>
 
                     @guest
                     <li class="nav-item ms-3">
@@ -1115,7 +1117,9 @@
 
                     @auth
                     <li class="nav-item ms-3">
-                        <span class="nav-text" style="color: var(--text-main); margin-right: 15px;">{{ Auth::user()->name }}</span>
+                        <a class="nav-link" href="{{ route('orders.history') }}" style="color: var(--text-main); margin-right: 15px;">
+                            {{ Auth::user()->name }}
+                        </a>
                     </li>
                     @if(Auth::user()->isAdmin())
                     <li class="nav-item">
@@ -1176,7 +1180,7 @@
 
                         <h2 class="h4 mt-3">Bezpieczeństwo</h2>
 
-                        <p class="text-muted">Atestowane zamki sprężynowe.</p>
+                        <p class="text-muted">Testowane zamki sprężynowe.</p>
 
                     </div>
 
@@ -1190,7 +1194,7 @@
 
                         <h2 class="h4 mt-3">Dostawa 24h</h2>
 
-                        <p class="text-muted">Wysyłka kurierem lub dronem.</p>
+                        <p class="text-muted">Wysyłka kurierem.</p>
 
                     </div>
 
@@ -1204,7 +1208,7 @@
 
                         <h2 class="h4 mt-3">Serwis</h2>
 
-                        <p class="text-muted">Wsparcie techników Fazbear Ent.</p>
+                        <p class="text-muted">Wsparcie techników MeScrap Co.</p>
 
                     </div>
 
@@ -1220,7 +1224,7 @@
 
             <div class="text-center mb-5">
 
-                <h2 class="display-5 mb-3" style="background: linear-gradient(135deg, var(--accent-color), var(--primary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Nasze Produkty</h2>
+                <h2 class="display-5 mb-3" style="background: linear-gradient(135deg, var(--accent-color), var(--primary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;">Best Sellery</h2>
 
                 <div style="width: 60px; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); margin: 0 auto;"></div>
 
@@ -1230,27 +1234,32 @@
 
             <div class="row g-4" role="list">
 
+                @forelse($products as $product)
                 <div class="col-md-6 col-lg-3">
 
-                    <div class="product-card h-100 d-flex flex-column" role="listitem" aria-label="Dłoń Endoszkieletu, cena 499.00 PLN">
+                    <div class="product-card h-100 d-flex flex-column" role="listitem" aria-label="{{ $product->name }}, cena {{ number_format($product->price, 2) }} PLN">
 
-                        <img src="https://via.placeholder.com/300x200/333/fff?text=Endo+01" class="card-img-top" alt="Metalowa dłoń endoszkieletu z widocznymi przewodami hydraulicznymi">
+                        <img src="{{ $product->image_url }}" class="card-img-top" alt="{{ $product->description }}">
 
                         <div class="card-body d-flex flex-column">
 
-                            <h3 class="h5 card-title">Dłoń Endoszkieletu</h3>
+                            <h3 class="h5 card-title">{{ $product->name }}</h3>
 
-                            <p class="card-text text-muted small">Kompatybilna z modelami generacji 1.</p>
+                            <p class="card-text text-muted small">{{ Str::limit($product->description, 60) }}</p>
 
                             <div class="mt-auto d-flex justify-content-between align-items-center">
 
-                                <span class="price-tag" aria-label="Cena: 499 złotych">499.00 PLN</span>
+                                <span class="price-tag" aria-label="Cena: {{ number_format($product->price, 2) }} złotych">{{ number_format($product->price, 2) }} PLN</span>
 
-                                <button class="btn btn-sm btn-custom" aria-label="Dodaj dłoń endoszkieletu za 499 złotych do koszyka">
+                                <form method="POST" action="{{ route('cart.add', $product) }}" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-sm btn-custom" aria-label="Dodaj {{ $product->name }} do koszyka">
 
-                                    <i class="bi bi-cart-plus" aria-hidden="true"></i> Dodaj
+                                        <i class="bi bi-cart-plus" aria-hidden="true"></i> Dodaj
 
-                                </button>
+                                    </button>
+                                </form>
 
                             </div>
 
@@ -1260,108 +1269,15 @@
 
                 </div>
 
-
-
-                <div class="col-md-6 col-lg-3">
-
-                    <div class="product-card h-100 d-flex flex-column">
-
-                        <img src="https://via.placeholder.com/300x200/333/fff?text=Voice+Box" class="card-img-top" alt="Moduł głosowy w kształcie małego głośnika z niebieską diodą">
-
-                        <div class="card-body d-flex flex-column">
-
-                            <h3 class="h5 card-title">Moduł Głosowy</h3>
-
-                            <p class="card-text text-muted small">Syntezer mowy z funkcją śmiechu.</p>
-
-                            <div class="mt-auto d-flex justify-content-between align-items-center">
-
-                                <span class="price-tag">250.00 PLN</span>
-
-                                <button class="btn btn-sm btn-custom" aria-label="Dodaj moduł głosowy do koszyka">
-
-                                    <i class="bi bi-cart-plus" aria-hidden="true"></i> Dodaj
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">Brak dostępnych produktów.</p>
                 </div>
-
-
-
-                <div class="col-md-6 col-lg-3">
-
-                    <div class="product-card h-100 d-flex flex-column">
-
-                        <img src="https://via.placeholder.com/300x200/333/fff?text=Spring+Lock" class="card-img-top" alt="Miedziany mechanizm zatrzasku sprężynowego, widoczne ostre elementy">
-
-                        <div class="card-body d-flex flex-column">
-
-                            <h3 class="h5 card-title">Zatrzask Sprężynowy</h3>
-
-                            <p class="card-text text-muted small">Ostrożnie! Wymaga korby do nakręcania.</p>
-
-                            <div class="mt-auto d-flex justify-content-between align-items-center">
-
-                                <span class="price-tag">89.99 PLN</span>
-
-                                <button class="btn btn-sm btn-custom" aria-label="Dodaj zatrzask sprężynowy do koszyka">
-
-                                    <i class="bi bi-cart-plus" aria-hidden="true"></i> Dodaj
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="col-md-6 col-lg-3">
-
-                    <div class="product-card h-100 d-flex flex-column">
-
-                        <img src="https://via.placeholder.com/300x200/333/fff?text=CPU+Chip" class="card-img-top" alt="Zielona płytka drukowana procesora z oznaczeniem AI">
-
-                        <div class="card-body d-flex flex-column">
-
-                            <h3 class="h5 card-title">Procesor AI</h3>
-
-                            <p class="card-text text-muted small">Do autonomicznego poruszania się w nocy.</p>
-
-                            <div class="mt-auto d-flex justify-content-between align-items-center">
-
-                                <span class="price-tag">1200.00 PLN</span>
-
-                                <button class="btn btn-sm btn-custom" aria-label="Dodaj procesor AI do koszyka">
-
-                                    <i class="bi bi-cart-plus" aria-hidden="true"></i> Dodaj
-
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                @endforelse
 
             </div>
 
         </section>
-
-
-
     </main>
 
     <footer class="text-center text-lg-start mt-5 pt-4 border-top border-secondary" role="contentinfo" aria-label="Informacje o stronie">
