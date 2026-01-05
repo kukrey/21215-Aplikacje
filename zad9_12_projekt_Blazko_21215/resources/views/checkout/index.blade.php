@@ -87,6 +87,9 @@
         .order-item:last-child {
             border-bottom: none;
         }
+        .order-item .text-muted {
+            color: #ffffff !important;
+        }
 
         .alert-info {
             background: rgba(6, 182, 212, 0.1);

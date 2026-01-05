@@ -53,7 +53,7 @@ class CartController extends Controller
             ]);
         }
 
-        return redirect('/#products')->with('success', 'Produkt dodany do koszyka!');
+        return back()->with('success', 'Produkt dodany do koszyka!');
     }
 
     public function update(Request $request, CartItem $cartItem)

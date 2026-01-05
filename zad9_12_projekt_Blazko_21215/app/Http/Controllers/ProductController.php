@@ -36,7 +36,7 @@ class ProductController extends Controller
         if ($sortBy === 'price') {
             $query->orderBy('price', $sortOrder);
         } elseif ($sortBy === 'stock') {
-            $query->orderBy('stock_quantity', $sortOrder);
+            $query->orderBy('stock', $sortOrder);
         } else {
             $query->orderBy('name', $sortOrder);
         }

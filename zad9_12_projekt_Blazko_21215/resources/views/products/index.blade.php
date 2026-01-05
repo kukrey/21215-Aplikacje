@@ -538,13 +538,13 @@
                                 <i class="bi bi-building"></i> {{ $product->manufacturer->name ?? 'Brak' }}
                             </div>
 
-                            @if($product->stock_quantity > 10)
+                            @if($product->stock > 10)
                             <span class="stock-badge stock-available">
                                 <i class="bi bi-check-circle"></i> Dostępny
                             </span>
-                            @elseif($product->stock_quantity > 0)
+                            @elseif($product->stock > 0)
                             <span class="stock-badge stock-low">
-                                <i class="bi bi-exclamation-triangle"></i> Mało sztuk ({{ $product->stock_quantity }})
+                                <i class="bi bi-exclamation-triangle"></i> Mało sztuk ({{ $product->stock }})
                             </span>
                             @else
                             <span class="stock-badge stock-out">
@@ -563,9 +563,9 @@
                             <form method="POST" action="{{ route('cart.add', $product) }}">
                                 @csrf
                                 <button type="submit" class="btn-add-cart" 
-                                    {{ $product->stock_quantity == 0 ? 'disabled' : '' }}>
+                                    {{ $product->stock == 0 ? 'disabled' : '' }}>
                                     <i class="bi bi-cart-plus"></i> 
-                                    {{ $product->stock_quantity > 0 ? 'Dodaj do koszyka' : 'Niedostępny' }}
+                                    {{ $product->stock > 0 ? 'Dodaj do koszyka' : 'Niedostępny' }}
                                 </button>
                             </form>
                         </div>

@@ -107,7 +107,7 @@ class CheckoutController extends Controller
             abort(403);
         }
 
-        $order->load('items.product', 'shippingMethod', 'orderStatus');
+        $order->load('items.product', 'shippingMethod', 'status');
         
         return view('checkout.success', compact('order'));
     }
