@@ -392,7 +392,6 @@
     <a href="#main-content" class="skip-link">Przejdź do głównej treści</a>
 
     <div id="a11y-panel" aria-label="Panel ułatwień dostępu" role="region">
-        <div class="a11y-icon" tabindex="0" role="button" aria-label="Otwórz/zamknij panel dostępności"><i class="bi bi-eye" aria-hidden="true"></i></div>
         <h6 class="text-center fw-bold">Ułatwienia</h6>
         <button class="btn btn-sm btn-outline-dark" onclick="toggleContrast()" aria-pressed="false" id="contrast-btn">Wysoki Kontrast</button>
         <button class="btn btn-sm btn-outline-dark" onclick="toggleFontSize()" aria-pressed="false" id="font-btn">Powiększ Tekst</button>
@@ -402,7 +401,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('Logo.png') }}" alt="Logo" style="height: 48px; margin-right: 8px;"> ANIMA-PARTS
+                <img src="{{ asset('Logo.png') }}" alt="Logo" style="height: 48px; margin-right: 8px;"> MeScrap
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -589,6 +588,33 @@
             </div>
         </div>
     </div>
+
+    <footer class="text-center text-lg-start mt-5 pt-4 border-top border-secondary" role="contentinfo" aria-label="Informacje o stronie" style="color: #d0d0d0;">
+
+        <div class="container p-4">
+
+            <p style="color: #d0d0d0;">© 2026 MeScrap. Sklep spełniający wymagania dostępności <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 poziom AA.</p>
+            
+            <div class="small mt-3" style="color: #d0d0d0;">
+                <p class="mb-1"><strong>Kontakt:</strong></p>
+                <p class="mb-1">Email: <a href="mailto:kontakt@mescrap.pl" style="color: #00d4ff;">kontakt@mescrap.pl</a></p>
+                <p class="mb-1">Telefon: <a href="tel:+48123456789" style="color: #00d4ff;">+48 123 456 789</a></p>
+                <p class="mb-1">Adres: ul. Robotyczna 42, 00-001 Warszawa, Polska</p>
+            </div>
+
+            <p class="small" style="color: #d0d0d0;">
+
+                <a href="#" aria-label="Oświadczenie dostępności" style="color: #00d4ff;">Oświadczenie dostępności</a> | 
+
+                <a href="#" aria-label="Polityka prywatności" style="color: #00d4ff;">Polityka prywatności</a> | 
+
+                <a href="#" aria-label="Warunki użytkowania" style="color: #00d4ff;">Warunki użytkowania</a>
+
+            </p>
+
+        </div>
+
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>

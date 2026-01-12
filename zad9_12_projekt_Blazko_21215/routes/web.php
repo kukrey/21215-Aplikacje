@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    $products = Product::select('products.*')
+    $products = Product::select('products.*', DB::raw('SUM(order_items.quantity) as total_quantity'))
         ->join('order_items', 'order_items.product_id', '=', 'products.id')
         ->groupBy('products.id')
-        ->orderByRaw('SUM(order_items.quantity) DESC')
+        ->orderBy('total_quantity', 'DESC')
         ->take(4)
         ->get();
 
@@ -59,4 +59,19 @@ Route::get('/admin/products/{product}/edit', [AdminController::class, 'editProdu
 Route::patch('/admin/products/{product}/price', [AdminController::class, 'updatePrice'])->name('admin.products.price');
 Route::delete('/admin/products/{product}', [AdminController::class, 'deleteProduct'])->name('admin.products.delete');
 Route::get('/admin/users/search', [AdminController::class, 'searchUser'])->name('admin.users.search');
+
+// Admin User Management routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [\App\Http\Controllers\Admin\AdminUserController::class, 'index'])->name('users.index');
+    Route::get('/users/inactive', [\App\Http\Controllers\Admin\AdminUserController::class, 'inactive'])->name('users.inactive');
+    Route::get('/users/{user}/password', [\App\Http\Controllers\Admin\AdminUserController::class, 'editPassword'])->name('users.password.edit');
+    Route::put('/users/{user}/password', [\App\Http\Controllers\Admin\AdminUserController::class, 'updatePassword'])->name('users.password.update');
+    Route::delete('/users/{user}', [\App\Http\Controllers\Admin\AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::post('/users/bulk-delete', [\App\Http\Controllers\Admin\AdminUserController::class, 'bulkDelete'])->name('users.bulk-delete');
+    
+    // Admin Order Management routes
+    Route::get('/orders', [\App\Http\Controllers\Admin\AdminOrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders/{order}/cancel', [\App\Http\Controllers\Admin\AdminOrderController::class, 'cancel'])->name('orders.cancel');
+    Route::post('/orders/{order}/refund', [\App\Http\Controllers\Admin\AdminOrderController::class, 'refund'])->name('orders.refund');
+});
 
